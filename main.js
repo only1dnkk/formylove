@@ -134,7 +134,7 @@ function setupQuest1(){
   redeemed = 0;
   updateCounter();
   if (btnToGreeting) btnToGreeting.disabled = true;
-  clearHearts(); spawnHearts(12); // чуть с запасом
+  clearHearts(); spawnHearts(5); // чуть с запасом
   showToast('Подсказка: ищи лёгкое покачивание 🌬️');
 }
 
