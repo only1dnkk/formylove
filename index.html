@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Для Никусика :>💖</title>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg">
+    <canvas id="heartsCanvas" aria-hidden="true"></canvas>
+  </div>
+
+  <!-- Кнопка музыки -->
+  <button class="music muted" id="musicBtn" aria-label="Музыка вкл/выкл" aria-pressed="false" title="Музыка">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M9 18V5l12-2v13" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="7" cy="18" r="3" />
+      <circle cx="19" cy="16" r="3" />
+      <line class="slash" x1="3" y1="3" x2="21" y2="21"/>
+    </svg>
+  </button>
+
+  <audio id="bgm" src="music.mp3" preload="auto" loop></audio>
+
+  <main>
+    <!-- Интрига -->
+    <section class="panel active" id="intro">
+      <div class="question">
+        <h1>Ты точно уверена, что хочешь это увидеть?</h1>
+        <div class="actions"><button class="btn" data-next>Да...</button></div>
+      </div>
+    </section>
+
+    <section class="panel" id="intro2">
+      <div class="question">
+        <h1>Серьёзно? Ты всё ещё не передумала?</h1>
+        <div class="actions"><button class="btn" data-next>Теперь уже точно не передумаю</button></div>
+      </div>
+    </section>
+
+    <section class="panel" id="intro3">
+      <div class="question">
+        <h1>Ладно, раз ты настаиваешь...</h1>
+        <div class="actions"><button class="btn" data-next>Покажи уже 💛</button></div>
+      </div>
+    </section>
+
+    <!-- Квест. Задание 1 -->
+    <section class="panel" id="quest1">
+      <div class="quest-card">
+        <h1>Перед тем как показать его, хочу, чтобы ты узнала несколько фактов (возможно, новых) 💫</h1>
+        <p class="muted">На этом экране спрятаны сердечки. Найди и нажми на 5 — каждое покажет один факт. Зачёт идёт после нажатия «Забрать».</p>
+        <div class="counter">
+          <span class="pill" id="pill">
+            <span class="pill-label">Сердечки: <strong id="foundCount">0</strong>/5</span>
+          </span>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" id="spawnAgain">Спрятать по‑новому</button>
+          <button class="btn" id="toQuest2" disabled>Продолжить</button>
+        </div>
+      </div>
+      <div id="huntArea" aria-hidden="false"></div>
+      <div class="toast" id="toast"></div>
+    </section>
+
+    <!-- Финал -->
+    <section class="panel" id="greeting" aria-live="polite" aria-atomic="true">
+      <div class="greeting-card">
+        <h2 class="script title" id="finalTitle">С Днём Рождения, роднулька!</h2>
+        <p class="message" id="message"></p>
+        <div class="actions"><button class="btn soft" id="openMemories">Открыть наши воспоминания</button></div>
+        <div class="hint">Двойной клик по заголовку — и сердечки рассыпятся ещё раз 💕</div>
+      </div>
+    </section>
+
+    <!-- Воспоминания -->
+    <section class="panel" id="memories" aria-hidden="true">
+      <div class="head">
+        <h3 class="script">Наши тёплые моменты</h3>
+        <div class="controls"><button class="btn" id="backToGreeting">Назад</button></div>
+      </div>
+      <div class="gallery" id="gallery">
+        <figure class="card"><img src="images/photo1.jpg" alt="Тот самый вечер"><figcaption>Тот самый вечер</figcaption></figure>
+        <figure class="card"><img src="images/photo2.jpg" alt="Смеялись до слёз"><figcaption>Смеялись до слёз</figcaption></figure>
+        <figure class="card"><img src="images/photo3.jpg" alt="Наша маленькая тайна"><figcaption>Наша маленькая тайна</figcaption></figure>
+        <figure class="card"><img src="images/photo4.jpg" alt="Сладкое утро"><figcaption>Сладкое утро</figcaption></figure>
+      </div>
+      <button class="closeMemories" title="Закрыть">×</button>
+    </section>
+  </main>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
