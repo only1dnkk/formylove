@@ -1,7 +1,3 @@
-// ================================
-// Навигация
-// ================================
-// NEW: Добавлен новый экран с "угрозой"
 const defaultOrder = ['intro', 'intro2', 'intro3', 'fake-alert', 'quest1', 'greeting'];
 const order = defaultOrder.filter(id => document.getElementById(id));
 let stepIndex = 0;
@@ -18,7 +14,7 @@ function showPanel(id){
   }
   if (id === 'memories') {
     panel.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'auto'; // Позволяем скроллить галерею
+    document.body.style.overflow = 'auto';
   } else {
     const mem = document.getElementById('memories');
     if (mem) mem.setAttribute('aria-hidden', 'true');
@@ -39,9 +35,6 @@ document.querySelectorAll('[data-next]').forEach(btn => {
   });
 });
 
-// ================================
-// Музыка
-// ================================
 const audio = document.getElementById('bgm');
 const musicBtn = document.getElementById('musicBtn');
 
@@ -79,9 +72,6 @@ function startMusicSafely(){
   }
 }
 
-// ================================
-// Финальный текст
-// ================================
 const finalText = `Этот день - твой. И я хотел сделать его особенным.
 Пусть этот год принесёт тебе много радости, вдохновения и приятных моментов.
 Желаю, чтобы рядом всегда были надёжные и тёплые люди, а каждый день открывал что то хорошее и новое.
@@ -134,9 +124,6 @@ function startCelebration(){
   setTimeout(()=> heartEngine.burst(window.innerWidth/2, window.innerHeight/2, 30), Math.min(totalMs+400, 5000));
 }
 
-// ================================
-// Квест 1 — Факты
-// ================================
 const coupons = [
   { title: 'Факт №1', text: 'Когда мы были на посадке, я почти не мог отвести от тебя взгляд. Ты выглядела очень красиво. Хотел подойти, но немного стеснялся. А потом вижу мы идём в одну сторону, как раз был красный свет на переходе. Подошёл познакомиться. И когда ты повернулась я аж немного завис. Ты оказалась ещё красивее вблизи💖' },
   { title: 'Факт №2', text: 'Как только мы начали проводить время вместе, парни из компании тут же заметили это и стали нас шипперить. Постоянно удивлялись и спрашивали типо встречаемся ли мы ахах' },
@@ -192,30 +179,23 @@ function spawnHearts(n=5){
     );
 
     heart.style.left = x + 'px'; heart.style.top  = y + 'px';
-    
-    // NEW: Полностью переработанная логика клика
+
     heart.addEventListener('click', (e)=>{
       e.stopPropagation();
       
-      // Не даем кликнуть, если все собрано или если сердце уже исчезает
       if (redeemed >= 5 || heart.style.pointerEvents === 'none') return;
       
-      // 1. Делаем сердце некликабельным
       heart.style.pointerEvents = 'none';
       
-      // 2. Показываем модалку с фактом
       const idx = redeemed;
       modal.show(coupons[idx].title, coupons[idx].text);
       
-      // 3. Запускаем анимацию полета сердца к счетчику
       const startRect = heart.getBoundingClientRect();
       animateHeartToCounter(startRect, () => {
-        // 5. После долета обновляем счетчик
         redeemed++;
         updateCounter();
       });
 
-      // 4. Запускаем анимацию исчезновения оригинального сердца
       heart.style.transform = 'translateY(-8px) rotate(-45deg) scale(0.1)';
       heart.style.opacity = '0';
 
@@ -233,10 +213,6 @@ function showToast(text){
 if (btnSpawnAgain) btnSpawnAgain.addEventListener('click', (e)=>{ makeRipple(e); setupQuest1(); });
 if (btnToGreeting) btnToGreeting.addEventListener('click', (e)=>{ makeRipple(e); showPanel('greeting'); });
 
-// ================================
-// Модалка купона
-// ================================
-// NEW: Логика модалки упрощена
 const modal = (() => {
   const m = document.createElement('div'); m.className = 'modal';
   const card = document.createElement('div'); card.className = 'voucher';
@@ -246,16 +222,13 @@ const modal = (() => {
 
   function hide() { m.classList.remove('show'); }
   btn.addEventListener('click', hide);
-  m.addEventListener('click', (e) => { if(e.target === m) hide(); }); // Закрытие по клику на фон
+  m.addEventListener('click', (e) => { if(e.target === m) hide(); });
 
   return {
     show: (title, text) => { h4.textContent = title; p.textContent = text; m.classList.add('show'); }
   };
 })();
 
-// ================================
-// Анимация полета сердечка
-// ================================
 function animateHeartToCounter(startRect, onDone){
   const pill = document.querySelector('#quest1 .pill');
   if (!pill) { onDone?.(); return; }
@@ -292,9 +265,6 @@ function animateHeartToCounter(startRect, onDone){
   };
 }
 
-// ================================
-// Фоновые сердечки — Canvas
-// ================================
 const canvas = document.getElementById('heartsCanvas');
 const ctx = canvas.getContext('2d', { alpha: true });
 const DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
@@ -366,7 +336,6 @@ function makeRipple(e){
   btn.appendChild(r); setTimeout(()=> r.remove(), 700);
 }
 
-// Воспоминания
 const openMemoriesBtn = document.getElementById('openMemories');
 const backToGreetingBtn = document.getElementById('backToGreeting');
 if (openMemoriesBtn){
@@ -382,5 +351,6 @@ window.addEventListener('keydown', (e)=>{
   const mem = document.getElementById('memories');
   if (e.key === 'Escape' && mem && mem.classList.contains('active')) showPanel('greeting');
 });
+
 
 window.addEventListener('touchstart', ()=>{}, {passive:true});
