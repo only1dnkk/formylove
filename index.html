@@ -15,7 +15,6 @@
     <canvas id="heartsCanvas" aria-hidden="true"></canvas>
   </div>
 
-  <!-- Кнопка музыки -->
   <button class="music muted" id="musicBtn" aria-label="Музыка вкл/выкл" aria-pressed="false" title="Музыка">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
       <path d="M9 18V5l12-2v13" stroke-linecap="round" stroke-linejoin="round"/>
@@ -28,7 +27,6 @@
   <audio id="bgm" src="music.mp3" preload="auto" loop></audio>
 
   <main>
-    <!-- Интрига -->
     <section class="panel active" id="intro">
       <div class="question">
         <h1>Ты точно уверена, что хочешь это увидеть?</h1>
@@ -50,7 +48,6 @@
       </div>
     </section>
 
-    <!-- NEW: Экран-сюрприз с интригой и юмором -->
     <section class="panel" id="fake-alert">
       <div class="alert-box">
         <div class="alert-icon">
@@ -64,7 +61,6 @@
       </div>
     </section>
 
-    <!-- Квест. Задание 1 -->
     <section class="panel" id="quest1">
       <div class="quest-card">
         <h1>Квест: Собери 5 Фактов О Нас 💫</h1>
@@ -83,7 +79,6 @@
       <div class="toast" id="toast"></div>
     </section>
 
-    <!-- Финал -->
     <section class="panel" id="greeting" aria-live="polite" aria-atomic="true">
       <div class="greeting-card">
         <h2 class="script title" id="finalTitle">С днём рождения, котятко💖</h2>
@@ -94,7 +89,6 @@
       </div>
     </section>
 
-    <!-- Воспоминания -->
     <section class="panel" id="memories" aria-hidden="true">
       <div class="head">
         <h3 class="script">Наши тёплые моменты</h3>
@@ -112,4 +106,5 @@
 
   <script src="main.js" defer></script>
 </body>
+
 </html>
